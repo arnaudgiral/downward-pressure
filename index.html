@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viol String Tension and Pressure Calculator</title>
+    <title>Viol String Tension and Pressure Calculator V.2</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
     
-    <!-- Added Playfair Display for that high-end editorial look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* Sleek, minimalist, high-contrast CSS reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            /* Clean sans-serif for data/UI */
             font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', sans-serif;
             background: #ffffff;
             color: #000000;
@@ -26,249 +22,45 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
-        
         .container { max-width: 1000px; margin: 0 auto; }
-        
-        header { 
-            margin-bottom: 4rem; 
-            border-bottom: 2px solid #000;
-            padding-bottom: 2rem;
-        }
-        
-        h1, h2, .string-note, .summary-value {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            color: #000;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            line-height: 1.1;
-        }
-        
-        .subtitle { 
-            font-size: 1rem; 
-            color: #666; 
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-        
-        .card {
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            /* No border-radius for a sharper, modern feel */
-        }
-        
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            letter-spacing: -0.01em;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.75rem;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem 1.5rem;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-        
-        label {
-            font-size: 0.65rem;
-            color: #000;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        input, select {
-            font-family: inherit;
-            font-size: 0.9rem;
-            padding: 0.75rem;
-            border: 1px solid #d0d0d0;
-            background: #fff;
-            color: #000;
-            transition: all 0.2s ease;
-            width: 100%;
-            border-radius: 0; /* Brutalist/Sleek sharp corners */
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #000;
-            box-shadow: inset 0 0 0 1px #000;
-        }
-        
-        .string-config {
-            display: grid;
-            gap: 1rem;
-        }
-        
-        .string-row {
-            display: grid;
-            grid-template-columns: 50px 1.5fr 2.5fr;
-            gap: 1.5rem;
-            align-items: center;
-            padding: 1.25rem;
-            background: #fafafa;
-            border: 1px solid #eee;
-        }
-        
-        .string-note {
-            font-size: 1.75rem;
-            text-align: center;
-            font-style: italic;
-        }
-
-        .string-controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            align-items: end;
-        }
-        
-        .wound-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1.5fr; 
-            gap: 0.75rem;
-            grid-column: span 2;
-        }
-        
-        button {
-            font-family: inherit;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 1rem 2rem;
-            border: 1px solid #000;
-            background: #000;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: 0;
-        }
-        
-        button:hover { 
-            background: #fff; 
-            color: #000;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-        
-        .btn-secondary { 
-            background: #fff; 
-            color: #000;
-            border: 1px solid #e5e5e5;
-        }
-        .btn-secondary:hover { 
-            border-color: #000; 
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-        
+        header { margin-bottom: 4rem; border-bottom: 2px solid #000; padding-bottom: 2rem; }
+        h1, h2, .string-note, .summary-value { font-family: 'Playfair Display', serif; font-weight: 600; color: #000; }
+        h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.1; }
+        .subtitle { font-size: 1rem; color: #666; font-weight: 400; letter-spacing: 0.02em; }
+        .card { background: #fff; border: 1px solid #e5e5e5; padding: 2.5rem; margin-bottom: 2.5rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 2rem; letter-spacing: -0.01em; border-bottom: 1px solid #eee; padding-bottom: 0.75rem; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem 1.5rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        label { font-size: 0.65rem; color: #000; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        input, select { font-family: inherit; font-size: 0.9rem; padding: 0.75rem; border: 1px solid #d0d0d0; background: #fff; border-radius: 0; width: 100%; }
+        input:focus, select:focus { outline: none; border-color: #000; box-shadow: inset 0 0 0 1px #000; }
+        .string-row { display: grid; grid-template-columns: 50px 1.5fr 2.5fr; gap: 1.5rem; align-items: center; padding: 1.25rem; background: #fafafa; border: 1px solid #eee; }
+        .string-note { font-size: 1.75rem; text-align: center; font-style: italic; }
+        .string-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .wound-details { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 0.75rem; grid-column: span 2; }
+        button { font-family: inherit; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 1rem 2rem; border: 1px solid #000; background: #000; color: #fff; cursor: pointer; transition: all 0.2s ease; border-radius: 0; }
+        button:hover { background: #fff; color: #000; }
+        .button-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; }
+        .btn-secondary { background: #fff; color: #000; border: 1px solid #e5e5e5; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
         thead { background: #000; color: #fff; }
-        
-        th {
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.7rem;
-            color: #fff;
-        }
-        
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        tbody tr:hover { background: #fafafa; }
-        
-        tfoot {
-            font-weight: 600;
-            background: #fafafa;
-        }
-        
-        tfoot td { border-top: 2px solid #000; }
-        
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .summary-card {
-            background: #fafafa;
-            padding: 2rem;
-            border: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .summary-label {
-            font-size: 0.65rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .summary-value {
-            font-size: 2.5rem;
-            line-height: 1;
-            letter-spacing: -0.02em;
-        }
-        
-        .summary-unit {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-            font-size: 1rem;
-            font-weight: 400;
-            color: #666;
-            margin-left: 0.25rem;
-        }
-        
-        .info-text {
-            font-size: 0.75rem;
-            color: #888;
-        }
-
+        th { padding: 1rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; }
+        td { padding: 1rem; border-bottom: 1px solid #eee; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .summary-card { background: #fafafa; padding: 2rem; border: 1px solid #eee; }
+        .summary-label { font-size: 0.65rem; color: #666; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600; }
+        .summary-value { font-size: 2.5rem; line-height: 1; }
+        .summary-unit { font-size: 1rem; font-weight: 400; color: #666; margin-left: 0.25rem; }
+        .info-text { font-size: 0.75rem; color: #888; }
         @media (max-width: 768px) {
-            body { padding: 1.5rem 1rem; }
-            .form-grid { grid-template-columns: 1fr; }
-            .string-row { grid-template-columns: 1fr; padding: 1.5rem; }
+            .string-row { grid-template-columns: 1fr; }
             .string-controls { grid-template-columns: 1fr; }
-            .wound-details { grid-template-columns: 1fr; grid-column: span 1; }
-            .card { padding: 1.5rem; }
-            h1 { font-size: 2rem; }
+            .wound-details { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div id="root"></div>
-    
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
@@ -276,7 +68,9 @@
             '6-string bass viol': ['D', 'G', 'c', 'e', 'a', "d'"],
             '7-string bass viol': ['A', 'D', 'G', 'c', 'e', 'a', "d'"],
             'treble viol': ['D', 'G', 'C', 'e', 'a', "d'"],
-            'tenor viol': ['G', 'C', 'F', 'a', 'd', "g'"]
+            'tenor viol': ['G', 'C', 'F', 'a', 'd', "g'"],
+            'violone in G': ['G', 'D', 'F', 'a', 'd', 'g'],
+            'violone in D': ['D', 'G', 'C', 'e', 'a', 'd']
         };
 
         const WIRE_MATERIALS = {
@@ -293,42 +87,42 @@
         };
 
         function getNoteOffset(note, instrumentType) {
+            // Instrument-specific frequency maps to handle different octaves
             if (instrumentType === 'treble viol') {
-                const trebleOffsets = {
-                    'D': -19, 'G': -14, 'C': -9, 'e': -5, 'a': 0, "d'": 5 
-                };
+                const trebleOffsets = { 'D': -19, 'G': -14, 'C': -9, 'e': -5, 'a': 0, "d'": 5 };
                 return trebleOffsets[note] !== undefined ? trebleOffsets[note] : NOTE_DATA[note];
+            }
+            if (instrumentType === 'violone in G') {
+                const gVioloneOffsets = { 'G': -38, 'D': -33, 'F': -28, 'a': -24, 'd': -19, 'g': -14 };
+                return gVioloneOffsets[note];
+            }
+            if (instrumentType === 'violone in D') {
+                const dVioloneOffsets = { 'D': -43, 'G': -38, 'C': -33, 'e': -29, 'a': -24, 'd': -19 };
+                return dVioloneOffsets[note];
             }
             return NOTE_DATA[note];
         }
 
         function getFrequency(note, pitch, instrumentType) {
-            const a4Freq = pitch; 
             const semitones = getNoteOffset(note, instrumentType);
-            return a4Freq * Math.pow(2, semitones / 12);
+            return pitch * Math.pow(2, semitones / 12);
         }
 
         function calculateTension(gauge, length, frequency, stringType, coreDiam, wireDiam, wireMaterial, gutDensity = 1.276) {
-            let mu = 0; 
-            
+            let mu = 0;
             if (stringType === 'wound-core-wire') {
-                const dCore = coreDiam / 10; 
+                const dCore = coreDiam / 10;
                 const dWire = wireDiam / 10; 
                 const wireDensity = WIRE_MATERIALS[wireMaterial] || 10.49;
-                
                 const muCore = gutDensity * Math.PI * Math.pow(dCore / 2, 2) * 100;
                 const muWire = wireDensity * (Math.pow(Math.PI, 2) / 4) * dWire * (dCore + dWire) * 100;
-                
                 mu = muCore + muWire;
             } else {
-                let effectiveDiameter = gauge;
-                const radiusCm = (effectiveDiameter / 10) / 2;
+                const radiusCm = (gauge / 10) / 2;
                 mu = gutDensity * Math.PI * (radiusCm * radiusCm) * 100;
             }
-            
             const L = length / 1000;
-            const tensionForce = mu * 4 * L * L * frequency * frequency;
-            return tensionForce / 9810; 
+            return (mu * 4 * L * L * frequency * frequency) / 9810;
         }
 
         function ViolPressureCalculator() {
@@ -340,51 +134,25 @@
                 gutDensity: 1.276
             });
 
-            const getNumStrings = () => config.instrumentType === '7-string bass viol' ? 7 : 6;
-
             const [stringData, setStringData] = useState([]);
             const [results, setResults] = useState(null);
             const [savedConfigs, setSavedConfigs] = useState([]);
             const isLoadingConfig = useRef(false);
 
             useEffect(() => {
-                try {
-                    const saved = localStorage.getItem('violConfigs');
-                    if (saved) setSavedConfigs(JSON.parse(saved));
-                } catch (e) { console.error('Load error:', e); }
+                const saved = localStorage.getItem('violConfigs');
+                if (saved) setSavedConfigs(JSON.parse(saved));
             }, []);
 
             useEffect(() => {
-                if (isLoadingConfig.current) {
-                    isLoadingConfig.current = false;
-                    return;
-                }
-
-                const n = getNumStrings();
+                if (isLoadingConfig.current) { isLoadingConfig.current = false; return; }
                 const notes = TUNINGS[config.instrumentType] || [];
-                
-                setStringData(prevData => {
-                    return Array(n).fill(null).map((_, i) => {
-                        const targetNote = notes[i] || '';
-                        const existing = prevData.find(s => s.note === targetNote);
-                        if (existing) return { ...existing }; 
-                        
-                        return {
-                            note: targetNote,
-                            gauge: '',
-                            stringType: 'plain',
-                            coreDiam: '',
-                            wireDiam: '',
-                            wireMaterial: 'Silver'
-                        };
-                    });
-                });
+                setStringData(notes.map(note => ({
+                    note, gauge: '', stringType: 'plain', coreDiam: '', wireDiam: '', wireMaterial: 'Silver'
+                })));
             }, [config.instrumentType]);
 
-            const handleConfigChange = (field, value) => {
-                setConfig(prev => ({ ...prev, [field]: value }));
-            };
-
+            const handleConfigChange = (field, value) => setConfig(prev => ({ ...prev, [field]: value }));
             const handleStringDataChange = (index, field, value) => {
                 const newData = [...stringData];
                 newData[index] = { ...newData[index], [field]: value };
@@ -392,129 +160,35 @@
             };
 
             const calculatePressure = () => {
-                try {
-                    const { lv, lc, ds, dc, hv, hc, bridgeRadius, stringSpacing, pitch, gutDensity } = config;
-                    const n = getNumStrings();
-                    const Lv = parseFloat(lv), Lc = parseFloat(lc);
-                    const dsVal = parseFloat(ds), dcVal = parseFloat(dc);
-                    const Hv = parseFloat(hv), Hc = parseFloat(hc);
-                    const R = parseFloat(bridgeRadius), W = parseFloat(stringSpacing);
+                const { lv, lc, ds, dc, hv, hc, bridgeRadius, stringSpacing, pitch, gutDensity } = config;
+                const n = stringData.length, Lv = parseFloat(lv), Lc = parseFloat(lc);
+                const dsVal = parseFloat(ds), dcVal = parseFloat(dc), Hv = parseFloat(hv), Hc = parseFloat(hc);
+                const R = parseFloat(bridgeRadius), W = parseFloat(stringSpacing);
 
-                    if (!n || !Lv || !Lc || isNaN(dsVal) || isNaN(dcVal) || !Hv || !Hc || !R || !W) {
-                        alert('Please fill in all instrument geometry fields.');
-                        return;
-                    }
-
-                    const stringResults = [];
-                    let totalPressure = 0, totalTension = 0;
-
-                    for (let i = 0; i < n; i++) {
-                        const sd = stringData[i];
-                        const gauge = parseFloat(sd.gauge);
-                        
-                        if (sd.stringType !== 'wound-core-wire' && !gauge) {
-                            alert(`Please enter gauge for string ${sd.note}`);
-                            return;
-                        }
-
-                        let coreDiam = 0, wireDiam = 0;
-                        if (sd.stringType === 'wound-core-wire') {
-                            coreDiam = parseFloat(sd.coreDiam);
-                            wireDiam = parseFloat(sd.wireDiam);
-                            if (!coreDiam || !wireDiam) {
-                                alert(`Please enter core and wire diameter for wound string ${sd.note}`);
-                                return;
-                            }
-                        }
-
-                        const frequency = getFrequency(sd.note, pitch, config.instrumentType);
-                        const T = calculateTension(gauge, Lv, frequency, sd.stringType, coreDiam, wireDiam, sd.wireMaterial, gutDensity);
-                        
-                        totalTension += T;
-
-                        const x = -W / 2 + (i * W / (n - 1));
-                        const heightDrop = R - Math.sqrt(R * R - x * x);
-                        const HcEff = Hc - heightDrop;
-                        const heightAtBridge = Hv + HcEff - dsVal;
-                        const heightAtTailpiece = Hv + HcEff - dcVal;
-
-                        if (Lv <= heightAtBridge || Lc <= heightAtTailpiece) {
-                             alert(`Math Error on string ${sd.note}: Vibrating length must be greater than bridge height. Please check your measurements.`);
-                             return;
-                        }
-
-                        const a = Math.sqrt(Lv * Lv - heightAtBridge * heightAtBridge);
-                        const b = Math.sqrt(Lc * Lc - heightAtTailpiece * heightAtTailpiece);
-                        const angleRad1 = Math.acos(heightAtBridge / Lv);
-                        const angleRad2 = Math.acos(heightAtTailpiece / Lc);
-                        const breakAngle = (angleRad1 + angleRad2) * 180 / Math.PI;
-                        
-                        const P = T * ((heightAtBridge / Lv) + (heightAtTailpiece / Lc));
-
-                        totalPressure += P;
-
-                        stringResults.push({
-                            note: sd.note,
-                            breakAngle,
-                            tension: T,
-                            pressure: P,
-                            frequency: frequency
-                        });
-                    }
-
-                    setResults({
-                        strings: stringResults,
-                        totalPressure,
-                        totalTension,
-                        avgPressure: totalPressure / n,
-                        config
-                    });
-                } catch (e) {
-                    console.error('Calculation error:', e);
-                    alert('Error in calculation: ' + e.message);
+                if (!Lv || !Lc || isNaN(dsVal) || isNaN(dcVal) || !Hv || !Hc || !R || !W) {
+                    alert('Please fill in all geometry fields.'); return;
                 }
-            };
 
-            const saveConfig = () => {
-                const name = prompt('Enter a name for this configuration:');
-                if (!name) return;
-                const newConfig = { name, timestamp: new Date().toISOString(), config, stringData };
-                const updated = [...savedConfigs, newConfig];
-                setSavedConfigs(updated);
-                localStorage.setItem('violConfigs', JSON.stringify(updated));
-                alert('Configuration saved.');
-            };
+                let totalPressure = 0, totalTension = 0;
+                const stringResults = stringData.map((sd, i) => {
+                    const freq = getFrequency(sd.note, pitch, config.instrumentType);
+                    const T = calculateTension(parseFloat(sd.gauge), Lv, freq, sd.stringType, parseFloat(sd.coreDiam), parseFloat(sd.wireDiam), sd.wireMaterial, gutDensity);
+                    const x = -W / 2 + (i * W / (n - 1));
+                    const HcEff = Hc - (R - Math.sqrt(R * R - x * x));
+                    const hB = Hv + HcEff - dsVal, hT = Hv + HcEff - dcVal;
+                    const P = T * ((hB / Lv) + (hT / Lc));
+                    totalTension += T; totalPressure += P;
+                    return { note: sd.note, frequency: freq, breakAngle: (Math.acos(hB/Lv) + Math.acos(hT/Lc)) * 180 / Math.PI, tension: T, pressure: P };
+                });
 
-            const loadConfig = () => {
-                if (savedConfigs.length === 0) {
-                    alert('No saved configurations found.');
-                    return;
-                }
-                const configList = savedConfigs.map((c, i) => 
-                    `${i + 1}. ${c.name} (${new Date(c.timestamp).toLocaleDateString()})`
-                ).join('\n');
-                const choice = prompt(`Select configuration:\n${configList}\n\nEnter number:`);
-                const index = parseInt(choice) - 1;
-                if (index >= 0 && index < savedConfigs.length) {
-                    isLoadingConfig.current = true;
-                    const loaded = savedConfigs[index];
-                    setConfig(loaded.config);
-                    setStringData(loaded.stringData);
-                }
-            };
-
-            const deleteConfigs = () => {
-                if (confirm('Delete all saved configurations?')) {
-                    setSavedConfigs([]);
-                    localStorage.removeItem('violConfigs');
-                }
+                setResults({ strings: stringResults, totalPressure, totalTension, avgPressure: totalPressure / n });
             };
 
             return (
                 <div className="container">
                     <header>
                         <h1>Viol String Tension & Pressure Calculator</h1>
-                        <div className="subtitle">Calculate tension and downward pressure on viola da gamba bridges</div>
+                        <div className="subtitle">Calculate tension and downward pressure on viol family bridges</div>
                     </header>
 
                     <div className="card">
@@ -522,15 +196,15 @@
                         <div className="form-grid">
                             <div className="form-group">
                                 <label>Instrument Type</label>
-                                <select value={config.instrumentType} 
-                                    onChange={(e) => handleConfigChange('instrumentType', e.target.value)}>
+                                <select value={config.instrumentType} onChange={(e) => handleConfigChange('instrumentType', e.target.value)}>
                                     <option value="6-string bass viol">6-String Bass Viol</option>
                                     <option value="7-string bass viol">7-String Bass Viol</option>
                                     <option value="treble viol">Treble Viol</option>
                                     <option value="tenor viol">Tenor Viol</option>
+                                    <option value="violone in G">Violone in G</option>
+                                    <option value="violone in D">Violone in D</option>
                                 </select>
                             </div>
-
                             <div className="form-group">
                                 <label>Pitch (Hz)</label>
                                 <select value={config.pitch} onChange={(e) => handleConfigChange('pitch', parseInt(e.target.value))}>
@@ -539,198 +213,96 @@
                                     <option value="440">440 Hz</option>
                                 </select>
                             </div>
-
                             <div className="form-group">
-                                <label>Gut Density (g/cm³)</label>
-                                <input type="number" step="0.001" value={config.gutDensity}
-                                    onChange={(e) => handleConfigChange('gutDensity', e.target.value)} />
+                                <label>Vibrating Length (mm)</label>
+                                <input type="number" value={config.lv} onChange={(e) => handleConfigChange('lv', e.target.value)} placeholder="670" />
                             </div>
-
                             <div className="form-group">
-                                <label>Vibrating String Length (mm)</label>
-                                <input type="number" step="0.1" value={config.lv}
-                                    onChange={(e) => handleConfigChange('lv', e.target.value)} placeholder="e.g. 670" />
-                                <span className="info-text">Nut to bridge distance</span>
+                                <label>Afterlength (mm)</label>
+                                <input type="number" value={config.lc} onChange={(e) => handleConfigChange('lc', e.target.value)} placeholder="284" />
                             </div>
-
                             <div className="form-group">
-                                <label>Tailpiece Afterlength (mm)</label>
-                                <input type="number" step="0.1" value={config.lc}
-                                    onChange={(e) => handleConfigChange('lc', e.target.value)} placeholder="e.g. 284" />
-                                <span className="info-text">Bridge to tailpiece anchor</span>
+                                <label>Bridge Height (mm)</label>
+                                <input type="number" value={config.hc} onChange={(e) => handleConfigChange('hc', e.target.value)} placeholder="75" />
                             </div>
-
-                            <div className="form-group">
-                                <label>Nut Height (mm)</label>
-                                <input type="number" step="0.1" value={config.ds}
-                                    onChange={(e) => handleConfigChange('ds', e.target.value)} placeholder="-3" />
-                                <span className="info-text">Above reference plane</span>
-                            </div>
-
-                            <div className="form-group">
-                                <label>Tailpiece Anchor Height (mm)</label>
-                                <input type="number" step="0.1" value={config.dc}
-                                    onChange={(e) => handleConfigChange('dc', e.target.value)} placeholder="15" />
-                                <span className="info-text">Above reference plane</span>
-                            </div>
-
-                            <div className="form-group">
-                                <label>Belly Arch Height (mm)</label>
-                                <input type="number" step="0.1" value={config.hv}
-                                    onChange={(e) => handleConfigChange('hv', e.target.value)} placeholder="19" />
-                                <span className="info-text">At the bridge position</span>
-                            </div>
-
-                            <div className="form-group">
-                                <label>Bridge Height (Center) (mm)</label>
-                                <input type="number" step="0.1" value={config.hc}
-                                    onChange={(e) => handleConfigChange('hc', e.target.value)} placeholder="75" />
-                            </div>
-
                             <div className="form-group">
                                 <label>Bridge Radius (mm)</label>
-                                <input type="number" step="0.1" value={config.bridgeRadius}
-                                    onChange={(e) => handleConfigChange('bridgeRadius', e.target.value)} placeholder="42" />
+                                <input type="number" value={config.bridgeRadius} onChange={(e) => handleConfigChange('bridgeRadius', e.target.value)} placeholder="42" />
                             </div>
-
+                            <div className="form-group">
+                                <label>Nut Height (mm)</label>
+                                <input type="number" value={config.ds} onChange={(e) => handleConfigChange('ds', e.target.value)} placeholder="-3" />
+                            </div>
+                            <div className="form-group">
+                                <label>Tailpiece Height (mm)</label>
+                                <input type="number" value={config.dc} onChange={(e) => handleConfigChange('dc', e.target.value)} placeholder="15" />
+                            </div>
+                            <div className="form-group">
+                                <label>Belly Arch (mm)</label>
+                                <input type="number" value={config.hv} onChange={(e) => handleConfigChange('hv', e.target.value)} placeholder="19" />
+                            </div>
                             <div className="form-group">
                                 <label>String Spacing (mm)</label>
-                                <input type="number" step="0.1" value={config.stringSpacing}
-                                    onChange={(e) => handleConfigChange('stringSpacing', e.target.value)} placeholder="60" />
-                                <span className="info-text">Outer to outer string</span>
+                                <input type="number" value={config.stringSpacing} onChange={(e) => handleConfigChange('stringSpacing', e.target.value)} placeholder="60" />
                             </div>
                         </div>
                     </div>
 
                     <div className="card">
                         <h2>String Configuration</h2>
-                        <div className="string-config">
+                        <div className="string-config" style={{display:'grid', gap:'1rem'}}>
                             {stringData.map((sd, i) => (
                                 <div key={i} className="string-row">
                                     <div className="string-note">{sd.note}</div>
-                                    
                                     <div className="string-controls">
-                                        <div className="form-group" style={{margin: 0}}>
+                                        <div className="form-group">
                                             <label>Type</label>
-                                            <select value={sd.stringType}
-                                                onChange={(e) => handleStringDataChange(i, 'stringType', e.target.value)}>
+                                            <select value={sd.stringType} onChange={(e) => handleStringDataChange(i, 'stringType', e.target.value)}>
                                                 <option value="plain">Plain Gut</option>
                                                 <option value="wound-equiv">Wound (equiv.)</option>
                                                 <option value="wound-core-wire">Wound (core+wire)</option>
                                             </select>
                                         </div>
-                                        
                                         {sd.stringType !== 'wound-core-wire' && (
-                                            <div className="form-group" style={{margin: 0}}>
-                                                <label>{sd.stringType === 'plain' ? 'Gauge (mm)' : 'Equiv. Diam. (mm)'}</label>
-                                                <input type="number" step="0.01" value={sd.gauge}
-                                                    onChange={(e) => handleStringDataChange(i, 'gauge', e.target.value)}
-                                                    placeholder="0.00" />
+                                            <div className="form-group">
+                                                <label>Gauge (mm)</label>
+                                                <input type="number" step="0.01" value={sd.gauge} onChange={(e) => handleStringDataChange(i, 'gauge', e.target.value)} />
                                             </div>
                                         )}
                                     </div>
-                                    
                                     {sd.stringType === 'wound-core-wire' && (
                                         <div className="wound-details">
-                                            <div className="form-group" style={{margin: 0}}>
-                                                <label>Core (mm)</label>
-                                                <input type="number" step="0.01" value={sd.coreDiam}
-                                                    onChange={(e) => handleStringDataChange(i, 'coreDiam', e.target.value)}
-                                                    placeholder="0.00" />
-                                            </div>
-                                            <div className="form-group" style={{margin: 0}}>
-                                                <label>Wire (mm)</label>
-                                                <input type="number" step="0.01" value={sd.wireDiam}
-                                                    onChange={(e) => handleStringDataChange(i, 'wireDiam', e.target.value)}
-                                                    placeholder="0.00" />
-                                            </div>
-                                            <div className="form-group" style={{margin: 0}}>
-                                                <label>Wrap Material</label>
-                                                <select value={sd.wireMaterial || 'Silver'} 
-                                                    onChange={(e) => handleStringDataChange(i, 'wireMaterial', e.target.value)}>
-                                                    {Object.keys(WIRE_MATERIALS).map(mat => (
-                                                        <option key={mat} value={mat}>{mat}</option>
-                                                    ))}
-                                                </select>
-                                            </div>
+                                            <div className="form-group"><label>Core (mm)</label><input type="number" step="0.01" value={sd.coreDiam} onChange={(e) => handleStringDataChange(i, 'coreDiam', e.target.value)} /></div>
+                                            <div className="form-group"><label>Wire (mm)</label><input type="number" step="0.01" value={sd.wireDiam} onChange={(e) => handleStringDataChange(i, 'wireDiam', e.target.value)} /></div>
+                                            <div className="form-group"><label>Material</label><select value={sd.wireMaterial} onChange={(e) => handleStringDataChange(i, 'wireMaterial', e.target.value)}>
+                                                {Object.keys(WIRE_MATERIALS).map(m => <option key={m} value={m}>{m}</option>)}
+                                            </select></div>
                                         </div>
                                     )}
                                 </div>
                             ))}
                         </div>
-
                         <div className="button-group">
                             <button onClick={calculatePressure}>Calculate</button>
-                            <button className="btn-secondary" onClick={saveConfig}>Save Data</button>
-                            <button className="btn-secondary" onClick={loadConfig}>Load Data</button>
-                            <button className="btn-secondary" onClick={deleteConfigs}>Clear All</button>
                         </div>
                     </div>
 
                     {results && (
-                        <>
-                            <div className="card">
-                                <h2>Analysis Summary</h2>
-                                <div className="summary-grid">
-                                    <div className="summary-card">
-                                        <div className="summary-label">Total Tension</div>
-                                        <div className="summary-value">
-                                            {results.totalTension.toFixed(2)}
-                                            <span className="summary-unit">kg</span>
-                                        </div>
-                                    </div>
-                                    <div className="summary-card">
-                                        <div className="summary-label">Total Pressure</div>
-                                        <div className="summary-value">
-                                            {results.totalPressure.toFixed(2)}
-                                            <span className="summary-unit">kg</span>
-                                        </div>
-                                    </div>
-                                    <div className="summary-card">
-                                        <div className="summary-label">Average Pressure</div>
-                                        <div className="summary-value">
-                                            {results.avgPressure.toFixed(2)}
-                                            <span className="summary-unit">kg</span>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="card">
+                            <h2>Results</h2>
+                            <div className="summary-grid">
+                                <div className="summary-card"><div className="summary-label">Total Tension</div><div className="summary-value">{results.totalTension.toFixed(2)}<span className="summary-unit">kg</span></div></div>
+                                <div className="summary-card"><div className="summary-label">Total Pressure</div><div className="summary-value">{results.totalPressure.toFixed(2)}<span className="summary-unit">kg</span></div></div>
                             </div>
-
-                            <div className="card">
-                                <h2>Detailed Metrics</h2>
-                                <div style={{overflowX: 'auto'}}>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>String Note</th>
-                                                <th>Frequency (Hz)</th>
-                                                <th>Break Angle (°)</th>
-                                                <th>Tension (kg)</th>
-                                                <th>Downward Pressure (kg)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {results.strings.map((s, i) => (
-                                                <tr key={i}>
-                                                    <td style={{fontFamily: "'Playfair Display', serif", fontSize: '1.25rem', fontWeight: 600}}>{s.note}</td>
-                                                    <td>{s.frequency.toFixed(2)}</td>
-                                                    <td>{s.breakAngle.toFixed(2)}</td>
-                                                    <td>{s.tension.toFixed(2)}</td>
-                                                    <td><strong>{s.pressure.toFixed(3)}</strong></td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan="3"><strong>SYSTEM TOTALS</strong></td>
-                                                <td><strong>{results.totalTension.toFixed(2)}</strong></td>
-                                                <td><strong>{results.totalPressure.toFixed(2)}</strong></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </>
+                            <table style={{marginTop:'2rem'}}>
+                                <thead><tr><th>Note</th><th>Hz</th><th>Angle°</th><th>Tension (kg)</th><th>Pressure (kg)</th></tr></thead>
+                                <tbody>
+                                    {results.strings.map((s, i) => (
+                                        <tr key={i}><td>{s.note}</td><td>{s.frequency.toFixed(1)}</td><td>{s.breakAngle.toFixed(1)}</td><td>{s.tension.toFixed(2)}</td><td><strong>{s.pressure.toFixed(3)}</strong></td></tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     )}
                 </div>
             );
